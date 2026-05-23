@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-steinpose-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-steinpose-{{ version }}.tar.gz
   sha256: a88235cb1c09e5a45d0eef0f6be3c3281cad997f14accc1b2a019fb3f2b9660d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - aicsimageio
@@ -27,7 +27,7 @@ requirements:
     - napari
     - numpy
     - pandas
-    - python >=3.8
+    - python >={{ python_min }}
     - pytorch >=1.11.0
     - qtpy
     - readimc
@@ -42,6 +42,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/napari-steinpose
